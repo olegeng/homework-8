@@ -60,12 +60,12 @@ class Human:
         self.eat-=10
         return f'{self.name} поїв'
     def see_td(self):
-        print(f'{self.name} пішов до лікаря')
         self.health+=50
         self.money-=100
+        return f'{self.name} пішов до лікаря'
     def rest(self):
-        print(f'{self.name} віддихав цілий день')
         self.satiety-=10
+        return f'{self.name} віддихав цілий день'
     def act(self):
         if self.eat<20:
             return self.shopping()
@@ -118,7 +118,6 @@ vasyl=Human('Vasyl',10,20,100)
 murzik=Cats('Мурзік')
 trap.plus_human()
 trap.plus_cats()
-trap.dom_cit()
 for day in range(1,365):
     print(f'=============Day {day}=============='.center(30))
     trap.dom_cit()
