@@ -9,50 +9,57 @@ class House:
         self.eat=0
         self.money=0
         self.feed=0
+
+    def plus_human(self):
+        self.money=ivan.money+vasyl.money
+        self.feed=ivan.feed+vasyl.feed
+        self.eat=ivan.eat+vasyl.eat
+        self.citizens.append(ivan.name)
+        self.citizens.append(vasyl.name)
+    def plus_cats(self):
+        self.feed+=murzik.eat
+        self.citizens.append(murzik.name)
+    def dom_cit(self):
+        self.money= vasyl.money + ivan.money
+        self.eat= vasyl.eat + ivan.eat
+        ivan.feed, vasyl.feed=self.feed, self.feed
+        murzik.eat=self.feed
     def __str__(self):
         return f'*{self.name}*\nДомашні запаси: Money= {self.money}, Eat: {self.eat}, Feed: {self.feed}'
-    def plus_human(self):
-        print(ivan.name+' поселився до хати')
-        self.money+=ivan.money
-        self.eat+=ivan.eat
-        ivan.eat=self.eat
-        ivan.money=self.money
-        self.citizens.append(ivan.name)
-    #def plus_cats(self,name):
-        #self.feed+=name.eat
-        #self.feed=name.eat
 
 class Human:
     def __init__(self,name,satiety,eat,money):
         self.name=name
         self.satiety=satiety
-        self.eat=eat
+        self.eat=trap.eat
         self.money=money
         self.health=100
         self.feed=15
     def __str__(self):
         return f'{self.name}, ситість: {self.satiety}, здоров\'я: {self.health}, гроші: {self.money}'
     def work(self):
-        print(f'{self.name} пішов на роботу')
         self.money+=50
         self.satiety-=10
         self.health-=5
+        return f'{self.name} пішов на роботу'
     def shopping(self):
         print(f'{self.name} пішов у магазин')
         if self.eat<=10:
             self.eat+=20
             self.money-=10
-            print(f'{self.name} купив продукти!')
         if self.feed<10:
             self.feed+=15
             self.money-=5
-            print(f'{self.name} купив корм!')
+            zak=f'{self.name} купив продукти і корм!'
+            return zak
+        else:
+            zak=f'{self.name} купив продукти'
+            return zak
     def eats(self):
-        print(f'{self.name} поїв')
         self.satiety+=10
         self.eat-=10
+        return f'{self.name} поїв'
     def see_td(self):
-        #if self.health<=40:
         print(f'{self.name} пішов до лікаря')
         self.health+=50
         self.money-=100
@@ -61,14 +68,14 @@ class Human:
         self.satiety-=10
     def act(self):
         if self.eat<20:
-            self.shopping()
+            return self.shopping()
         elif self.satiety<20:
-            self.eats()
+            return self.eats()
         elif self.money<150:
-            self.work()
+            return self.work()
         elif self.health<=40:
-            self.see_td()
-        else: self.rest()
+            return self.see_td()
+        else: return self.rest()
 
 class Cats:
     def __init__(self ,name):
@@ -105,14 +112,24 @@ class Cats:
             else:
                 self.catch()
                 return f'Кіт {self.name} спіймав мишу!'
-
+trap=House('Треп хата')
 ivan=Human('Іван',30,10,40)
 vasyl=Human('Vasyl',10,20,100)
 murzik=Cats('Мурзік')
-trap=House('Треп хата')
 trap.plus_human()
-for day in range(1,3):
-    print(f'=====Day {day}======')
+trap.plus_cats()
+trap.dom_cit()
+for day in range(1,10):
+    print(f'=============Day {day}=============='.center(30))
+
+
+    trap.dom_cit()
+    print(ivan.act())
+    print(vasyl.act())
     print(murzik.act())
+    print(('=-='*5+'Станом на ранок:'+'=-='*5).center(30))
+    print(trap)
+
+
 print(f'В {trap.name} живуть:',*trap.citizens)
 #todo: дописати вхід в дім котів і зробити спосіб їх годування
