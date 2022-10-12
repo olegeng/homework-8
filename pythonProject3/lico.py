@@ -119,10 +119,8 @@ murzik=Cats('Мурзік')
 trap.plus_human()
 trap.plus_cats()
 trap.dom_cit()
-for day in range(1,10):
+for day in range(1,365):
     print(f'=============Day {day}=============='.center(30))
-
-
     trap.dom_cit()
     print(ivan.act())
     print(vasyl.act())
