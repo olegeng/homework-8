@@ -70,8 +70,7 @@ Ioan=Husband()
 for day in range(1,20):
     print(f'=====day {day}=====')
     print(home)
-    print(Tereza,
-          Tereza.act())
+    print(Tereza.act())
     home.purity-=5
     print(Tereza.act())
 #todo Дописати функцію HUSBAND and Children, настроїти satiety,happy для WIFE
