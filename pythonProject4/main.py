@@ -1,1 +1,1 @@
-#start 21.06
+print('Hello world!')
